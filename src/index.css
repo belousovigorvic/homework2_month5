@@ -13,3 +13,8 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.dark, .dark a {
+  background-color: #303030;
+  color: #fff;
+}

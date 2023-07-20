@@ -17,3 +17,7 @@
 .form button {
   cursor: pointer;
 }
+
+.CreatePost {
+  height: 100vh;
+}

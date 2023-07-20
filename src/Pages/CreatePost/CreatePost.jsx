@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import classes from './CreatePost.module.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import {MyContext} from '../../App'
+import { ModeContext } from '../../App'
 
 const CreatePost = () => {
   const [postData, setPostData] = useState({
@@ -12,6 +14,8 @@ const CreatePost = () => {
   })
 
   const navigate = useNavigate()
+  const [newPost, setNewPost] = useContext(MyContext);
+  const [mode, setMode] = useContext(ModeContext)
 
   const handlePostData = () => {
     axios
@@ -23,6 +27,7 @@ const CreatePost = () => {
       .then(response => {
         console.log(response.data)
         navigate('/posts')
+        setNewPost(prevData => [...prevData, postData]);
       })
       .catch(error => {
         console.error('Ошибка', error)
@@ -48,7 +53,7 @@ const CreatePost = () => {
   ]
 
   return (
-    <>
+    <div className={classes.CreatePost}>
       <h1 className={classes.createPost__title}>Create Post</h1>
       <form className={classes.form} onSubmit={handleSubmit}>
         {inputFields.map(field => (
@@ -64,7 +69,7 @@ const CreatePost = () => {
         ))}
         <button type="submit">Send</button>
       </form>
-    </>
+    </div>
   )
 }
 
